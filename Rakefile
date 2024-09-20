@@ -7,7 +7,7 @@ RSpec::Core::RakeTask.new(:spec)
 
 require "standard/rake"
 
-task default: %i[spec standard]
+task default: %i[spec lint]
 
 desc "Run StandardRB linter and automatically fix issues"
 task :lint do
