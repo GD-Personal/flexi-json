@@ -48,10 +48,8 @@ flexi_json.find_duplicates("email,full_name")
 
 ## TODOS
 - Improve search filter by specifying fields to filter from
-- Add support for accepting a dataset url rather than just a local file path
-- Add support for accepting raw json data
 - Add CRUD support to the dataset
-- Optimise the search function by implimenting indeces
+- Optimise the search function by implementing indeces 
 - Optimise the loader by chunking the data
 
 ## Contributing
