@@ -23,7 +23,7 @@ bundle install
 
 ## Usage
 ```ruby
-require 'flexi-json'
+require 'flexi/json'
 
 # File path to the JSON data
 Flexi::Json::Run.new("some/path/to/file.json").search("john")
