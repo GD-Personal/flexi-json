@@ -1,6 +1,6 @@
-# FlexiJson
+# flexi-json
 
-FlexiJson is a versatile Ruby gem designed for manipulating JSON data. With functionalities for searching, generating new JSON, and transforming existing structures.
+`Flexi::Json` is a versatile Ruby gem designed for manipulating JSON data. With functionalities for searching, generating new JSON, and transforming existing structures.
 
 ## Installation
 
