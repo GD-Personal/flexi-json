@@ -20,7 +20,26 @@ bundle install
 ```
 
 ## Usage
+```ruby
+require 'flexi-json'
 
+# File path to the JSON data
+file_path = "some/path/to/file.json"
+
+# Parse JSON and search for a user
+data = Flexi::Json::Loader.new(file_path).load_data
+
+searcher = Flexi::Json::Seacher.new(data)
+
+# Search for data
+searcher.search("john")
+
+# Or filter it by your chosen key e.g first_name
+searcher.search("john", "first_name")
+
+# Find duplicate emails
+seacher.find_duplicate_emails
+```
 
 ## Contributing
 Contributions are welcome! If you have suggestions for improvements or new features, feel free to fork the repository and create a pull request. Please ensure your code adheres to the project's coding standards and includes tests for new features.

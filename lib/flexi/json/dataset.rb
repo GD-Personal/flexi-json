@@ -1,4 +1,4 @@
-module JsonSearchCli
+module Flexi::Json
   class Dataset
     attr_reader :attributes
 

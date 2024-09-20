@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require_relative "json/dataset"
+require_relative "json/loader"
+require_relative "json/searcher"
 require_relative "json/version"
 
 module Flexi
