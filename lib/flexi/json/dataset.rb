@@ -24,11 +24,11 @@ module Flexi::Json
       end
     end
 
-    private
-
     def searchable_fields
       @searchable_fields ||= attributes.keys.map(&:to_s)
     end
+
+    private
 
     # Method to validate that a key is a valid method name and not dangerous
     def valid_key?(key)
@@ -43,15 +43,15 @@ module Flexi::Json
     def validate_key(key)
       raise "Invalid key: #{key}" unless valid_key?(key)
     end
-    
+
     def set_instance_variable(key, value)
       instance_variable_set(:"@#{key}", value)
     end
-    
+
     def define_accessor_methods(key)
       self.class.class_eval do
         define_method(key) { instance_variable_get(:"@#{key}") } unless method_defined?(key)
-          define_method(:"#{key}=") { |val| instance_variable_set(:"@#{key}", val) } unless method_defined?(:"#{key}=")
+        define_method(:"#{key}=") { |val| instance_variable_set(:"@#{key}", val) } unless method_defined?(:"#{key}=")
       end
     end
   end

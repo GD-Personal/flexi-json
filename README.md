@@ -26,22 +26,17 @@ bundle install
 require 'flexi-json'
 
 # File path to the JSON data
-file_path = "some/path/to/file.json"
-
-# Parse JSON and search for a user
-data = Flexi::Json::Loader.new(file_path).load_data
-
-searcher = Flexi::Json::Seacher.new(data)
-
-# Search for data
-searcher.search("john")
+Flexi::Json::Run.new("some/path/to/file.json").search("john")
 
 # Or filter it by your chosen key e.g first_name
-searcher.search("john", "first_name")
+Flexi::Json::Run.new("some/path/to/file.json").search("john", "first_name")
+Flexi::Json::Run.new("some/path/to/file.json").search("john", "first_name,email")
 
 # Find duplicate emails
-seacher.find_duplicate_emails
+Flexi::Json::Run.new("some/path/to/file.json").find_duplicates("email")
+Flexi::Json::Run.new("some/path/to/file.json").find_duplicates("email,full_name")
 ```
+
 ## TODOS
 - Improve search filter by specifying fields to filter from
 - Improve the find_duplicate function by adding ability to find duplciates based on a selected field

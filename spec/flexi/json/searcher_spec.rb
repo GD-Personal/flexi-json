@@ -92,23 +92,29 @@ RSpec.describe Flexi::Json::Searcher do
     end
   end
 
-  describe "#find_duplicate_emails" do
+  describe "#find_duplicates" do
     subject { described_class.new(data) }
 
     context "when there is a duplicate" do
       it "returns the duplicate emails" do
-        expect(subject.find_duplicate_emails.size).to eq 2
+        expect(subject.find_duplicates("email").size).to eq 2
       end
 
       it "returns a collection of Dataset object" do
-        expect(subject.find_duplicate_emails.first.class).to eq Flexi::Json::Dataset
+        expect(subject.find_duplicates("email").first.class).to eq Flexi::Json::Dataset
       end
     end
 
     context "when there is no duplicate" do
       let(:data) { Flexi::Json::Loader.new("./spec/data/unique_dataset.json").load_data }
       it "returns an empty array" do
-        expect(subject.find_duplicate_emails).to eq []
+        expect(subject.find_duplicates("email")).to eq []
+      end
+    end
+
+    context "when passing a non-existent json key" do
+      it "returns an empty array" do
+        expect(subject.find_duplicates("idontexist")).to eq []
       end
     end
   end
