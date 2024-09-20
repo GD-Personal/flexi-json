@@ -11,7 +11,7 @@ task default: %i[spec standard]
 
 desc "Run StandardRB linter and automatically fix issues"
 task :lint do
-  sh "bundle exec standardrb -a lib spec"
+  sh "bundle exec standardrb"
 end
 
 desc "Run bundle-audit to check for gems' vulnerabilities"
