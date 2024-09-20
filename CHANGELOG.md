@@ -2,4 +2,4 @@
 
 ## [0.1.0] - 2024-09-20
 
-- Initial release
+- The first release of flexi-json gem
