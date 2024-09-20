@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors = ["Gerda Decio"]
   spec.email = ["contact@gerdadecio.com"]
 
-  spec.summary = "A simple CLI application built with Ruby."
-  spec.description = "A simple Ruby CLI application that would search through any JSON dataset."
+  spec.summary = "A ruby gem designed for manipulating JSON data."
+  spec.description = "A versatile Ruby gem designed for manipulating JSON data. With functionalities for searching, generating new JSON, and transforming existing structures."
   spec.homepage = "https://github.com/GD-Personal/flexi-json"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.0.0"
