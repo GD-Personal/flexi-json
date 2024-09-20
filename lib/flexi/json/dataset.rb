@@ -5,19 +5,7 @@ module Flexi::Json
     def initialize(attributes = {})
       @attributes = attributes
 
-      @attributes.each do |key, value|
-        # Validate that the key is a valid Ruby method name
-        raise "Invalid key: #{key}" unless valid_key?(key)
-        
-        # Create instance variables safely
-        instance_variable_set(:"@#{key}", value)
-
-        # Define getter and setter methods dynamically
-        self.class.class_eval do
-          define_method(key) { instance_variable_get(:"@#{key}") } unless method_defined?(key)
-          define_method(:"#{key}=") { |val| instance_variable_set(:"@#{key}", val) } unless method_defined?(:"#{key}=")
-        end
-      end
+      define_instance_methods_from_attributes
     end
 
     # Returns true if any of the client's fields match the search query
@@ -46,6 +34,22 @@ module Flexi::Json
     # Prevent overriding critical Ruby methods
     def dangerous_method?(key)
       %w[initialize object_id method_missing to_s send class].include?(key.to_s)
+    end
+
+    def define_instance_methods_from_attributes
+      @attributes.each do |key, value|
+        # Validate that the key is a valid Ruby method name
+        raise "Invalid key: #{key}" unless valid_key?(key)
+
+        # Create instance variables safely
+        instance_variable_set(:"@#{key}", value)
+
+        # Define getter and setter methods dynamically
+        self.class.class_eval do
+          define_method(key) { instance_variable_get(:"@#{key}") } unless method_defined?(key)
+          define_method(:"#{key}=") { |val| instance_variable_set(:"@#{key}", val) } unless method_defined?(:"#{key}=")
+        end
+      end
     end
   end
 end
