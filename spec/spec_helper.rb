@@ -1,11 +1,16 @@
 # frozen_string_literal: true
 
+require "simplecov"
+require "simplecov_json_formatter"
 require "flexi/json"
 
 # Require lib files
 Dir.glob("./lib/flexi/**/*.rb").each do |file|
   require file
 end
+
+SimpleCov.formatter = SimpleCov::Formatter::JSONFormatter
+SimpleCov.start
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
