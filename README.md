@@ -1,4 +1,4 @@
-[![Github Actions](https://github.com/GD-Personal/flexi-json/actions/workflows/main.yml/badge.svg)](https://github.com/GD-Personal/flexi-json/actions/workflows/main.yml) [![Maintainability](https://api.codeclimate.com/v1/badges/bd14f8a5a0c7575d2ac2/maintainability)](https://codeclimate.com/github/GD-Personal/flexi-json/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/bd14f8a5a0c7575d2ac2/test_coverage)](https://codeclimate.com/github/GD-Personal/flexi-json/test_coverage)
+[![Gem Version](https://badge.fury.io/rb/flexi-json.svg)](https://badge.fury.io/rb/flexi-json) [![Github Actions](https://github.com/GD-Personal/flexi-json/actions/workflows/main.yml/badge.svg)](https://github.com/GD-Personal/flexi-json/actions/workflows/main.yml) [![Maintainability](https://api.codeclimate.com/v1/badges/bd14f8a5a0c7575d2ac2/maintainability)](https://codeclimate.com/github/GD-Personal/flexi-json/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/bd14f8a5a0c7575d2ac2/test_coverage)](https://codeclimate.com/github/GD-Personal/flexi-json/test_coverage)
 
 # flexi-json
 
