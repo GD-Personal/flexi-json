@@ -10,7 +10,7 @@ module Flexi::Json
 
   class Run
     # Your code goes here...
-    def initialize(data, options = {})
+    def initialize(data)
       @json_data = Flexi::Json::Loader.new(data).load_data
     end
 

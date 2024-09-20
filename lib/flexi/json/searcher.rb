@@ -22,7 +22,7 @@ module Flexi
         return [] if filtered_fields.empty?
 
         grouped_data = @data.group_by do |d|
-          filtered_fields.map { |f| d.attributes[f].to_s.downcase }
+          filtered_fields.map { |f| d.attributes[f.to_sym].to_s.downcase }
         end
         grouped_data.each do |key, value|
           duplicates[key] = value if value.size > 1

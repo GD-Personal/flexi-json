@@ -1,0 +1,41 @@
+name: Update Changelog on Merge to Main
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
+
+jobs:
+  update_changelog:
+    if: github.event.pull_request.merged == true && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.0'
+        bundler-cache: true
+
+    - name: Install Dependencies
+      run: bundle install
+
+    - name: Generate Changelog
+      run: |
+        bundle exec github_changelog_generator \
+          --user ${{ github.repository_owner }} \
+          --project ${{ github.event.repository.name }} \
+          --token ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Commit Changelog
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add CHANGELOG.md
+        git commit -m "Update CHANGELOG.md for PR #${{ github.event.pull_request.number }}"
+        git push origin main

@@ -25,24 +25,31 @@ bundle install
 ```ruby
 require 'flexi/json'
 
-# File path to the JSON data
-Flexi::Json::Run.new("some/path/to/file.json").search("john")
+# Load a json data from a local file
+flexi_json = Flexi::Json::Run.new("some/path/to/file.json")
+
+# Load a raw json data
+flexi_json = Flexi::Json::Run.new("{\"name\":\"John\",\"address\":\"Sydney Australia\"}")
+
+# Load a json data from aurl
+flexi_json = Flexi::Json::Run.new("https://raw.githubusercontent.com/GD-Personal/flexi-json/main/spec/data/dataset.json")
+
+# Search for data
+flexi_json.search("john")
 
 # Or filter it by your chosen key e.g first_name
-Flexi::Json::Run.new("some/path/to/file.json").search("john", "first_name")
-Flexi::Json::Run.new("some/path/to/file.json").search("john", "first_name,email")
+flexi_json.search("john", "first_name")
+flexi_json.search("john", "first_name,email")
 
 # Find duplicate emails
-Flexi::Json::Run.new("some/path/to/file.json").find_duplicates("email")
-Flexi::Json::Run.new("some/path/to/file.json").find_duplicates("email,full_name")
+flexi_json.find_duplicates("email")
+flexi_json.find_duplicates("email,full_name")
 ```
 
 ## TODOS
 - Improve search filter by specifying fields to filter from
-- Add support for accepting a dataset url rather than just a local file path
-- Add support for accepting raw json data
 - Add CRUD support to the dataset
-- Optimise the search function by implimenting indeces
+- Optimise the search function by implementing indeces 
 - Optimise the loader by chunking the data
 
 ## Contributing
