@@ -1,5 +1,4 @@
 require "spec_helper"
-require "byebug"
 
 RSpec.describe Flexi::Json::Searcher do
   let(:data) { Flexi::Json::Loader.new("./spec/data/dataset.json").load_data }
