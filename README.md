@@ -40,6 +40,14 @@ searcher.search("john", "first_name")
 # Find duplicate emails
 seacher.find_duplicate_emails
 ```
+## TODOS
+- Improve search filter by specifying fields to filter from
+- Improve the find_duplicate function by adding ability to find duplciates based on a selected field
+- Add support for accepting a dataset url rather than just a local file path
+- Add support for accepting raw json data
+- Add CRUD support to the dataset
+- Optimise the search function by implimenting indeces
+- Optimise the loader by chunking the data
 
 ## Contributing
 Contributions are welcome! If you have suggestions for improvements or new features, feel free to fork the repository and create a pull request. Please ensure your code adheres to the project's coding standards and includes tests for new features.
