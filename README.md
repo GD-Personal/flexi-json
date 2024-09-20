@@ -39,7 +39,6 @@ Flexi::Json::Run.new("some/path/to/file.json").find_duplicates("email,full_name"
 
 ## TODOS
 - Improve search filter by specifying fields to filter from
-- Improve the find_duplicate function by adding ability to find duplciates based on a selected field
 - Add support for accepting a dataset url rather than just a local file path
 - Add support for accepting raw json data
 - Add CRUD support to the dataset
