@@ -1,11 +1,12 @@
 name: Update Changelog on Merge to Main
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
-    types:
-      - closed
 
 jobs:
   update_changelog:
