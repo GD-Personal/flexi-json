@@ -7,17 +7,15 @@ module Flexi::Json
 
       @attributes.each do |key, value|
         # Validate that the key is a valid Ruby method name
-        if valid_key?(key)
-          # Create instance variables safely
-          instance_variable_set(:"@#{key}", value)
+        raise "Invalid key: #{key}" unless valid_key?(key)
+        
+        # Create instance variables safely
+        instance_variable_set(:"@#{key}", value)
 
-          # Define getter and setter methods dynamically
-          self.class.class_eval do
-            define_method(key) { instance_variable_get(:"@#{key}") } unless method_defined?(key)
-            define_method(:"#{key}=") { |val| instance_variable_set(:"@#{key}", val) } unless method_defined?(:"#{key}=")
-          end
-        else
-          raise "Invalid key: #{key}"
+        # Define getter and setter methods dynamically
+        self.class.class_eval do
+          define_method(key) { instance_variable_get(:"@#{key}") } unless method_defined?(key)
+          define_method(:"#{key}=") { |val| instance_variable_set(:"@#{key}", val) } unless method_defined?(:"#{key}=")
         end
       end
     end
