@@ -5,7 +5,11 @@ module Flexi::Json
     def initialize(attributes = {})
       @attributes = attributes
 
-      define_instance_methods_from_attributes
+      @attributes.each do |key, value|
+        validate_key(key)
+        set_instance_variable(key, value)
+        define_accessor_methods(key)
+      end
     end
 
     # Returns true if any of the client's fields match the search query
@@ -36,19 +40,18 @@ module Flexi::Json
       %w[initialize object_id method_missing to_s send class].include?(key.to_s)
     end
 
-    def define_instance_methods_from_attributes
-      @attributes.each do |key, value|
-        # Validate that the key is a valid Ruby method name
-        raise "Invalid key: #{key}" unless valid_key?(key)
-
-        # Create instance variables safely
-        instance_variable_set(:"@#{key}", value)
-
-        # Define getter and setter methods dynamically
-        self.class.class_eval do
-          define_method(key) { instance_variable_get(:"@#{key}") } unless method_defined?(key)
+    def validate_key(key)
+      raise "Invalid key: #{key}" unless valid_key?(key)
+    end
+    
+    def set_instance_variable(key, value)
+      instance_variable_set(:"@#{key}", value)
+    end
+    
+    def define_accessor_methods(key)
+      self.class.class_eval do
+        define_method(key) { instance_variable_get(:"@#{key}") } unless method_defined?(key)
           define_method(:"#{key}=") { |val| instance_variable_set(:"@#{key}", val) } unless method_defined?(:"#{key}=")
-        end
       end
     end
   end
