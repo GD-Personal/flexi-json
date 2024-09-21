@@ -41,7 +41,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "standard", "~> 1.3"
   spec.add_development_dependency "simplecov", "~> 0.22.0"
   spec.add_development_dependency "simplecov_json_formatter", "~> 0.1.4"
-  spec.add_development_dependency "github_changelog_generator", "~> 1.16.4"
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html
