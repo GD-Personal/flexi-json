@@ -41,4 +41,4 @@ jobs:
         git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/${{ github.repository }}
         git add CHANGELOG.md
         git commit -m "Update CHANGELOG.md for PR #${{ github.event.pull_request.number }}"
-        git push origin main
+        git push origin json_data
