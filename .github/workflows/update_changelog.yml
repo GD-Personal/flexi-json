@@ -3,12 +3,6 @@ name: Update Changelog on Merge to Main
 on:
   pull_request:
     types: [ opened ]
-  
-  workflow_dispatch:
-    inputs:
-      release_version:
-        description: 'Set Release Version'
-        required: true
 
 jobs:
   build:
