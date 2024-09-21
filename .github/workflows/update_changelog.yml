@@ -2,14 +2,17 @@ name: Update Changelog on Merge to Main
 
 on:
   push:
-    branches:
-      - main
   pull_request:
-    branches:
-      - main
+    types: [ opened ]
+  
+  workflow_dispatch:
+    inputs:
+      release_version:
+        description: 'Set Release Version'
+        required: true
 
 jobs:
-  update_changelog:
+  build:
     runs-on: ubuntu-latest
     name: Ruby ${{ matrix.ruby }}
     strategy:
@@ -18,29 +21,11 @@ jobs:
           - '3.3.4'
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
+    - uses: actions/checkout@v4
+    - name: Run Changelog CI
+      uses: saadmk11/changelog-ci@v1.1.2
       with:
-        ruby-version: ${{ matrix.ruby }}
-        bundler-cache: true
-
-    - name: Generate Changelog
-      run: |
-        bundle exec github_changelog_generator \
-          --user ${{ github.repository_owner }} \
-          --project ${{ github.event.repository.name }} \
-          --token ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Commit Changelog
-      run: |
-        git branch
-        git checkout json_data
-        git config --global user.name "github-actions[bot]"
-        git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/${{ github.repository }}:json_data
-        git add CHANGELOG.md
-        git commit -m "Update CHANGELOG.md for PR #${{ github.event.pull_request.number }}"
-        git push origin json_data
+        committer_username: 'github-actions.bot'
+        committer_email: 'github-actions.bot@users.noreply.github.com'
+        release_version: ${{ github.event.inputs.release_version }}
+        github_token: ${{ secrets.GH_PAT }}
