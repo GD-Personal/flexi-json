@@ -1,4 +1,7 @@
-[![Gem Version](https://badge.fury.io/rb/flexi-json.svg)](https://badge.fury.io/rb/flexi-json) [![Github Actions](https://github.com/GD-Personal/flexi-json/actions/workflows/ci.yml/badge.svg)](https://github.com/GD-Personal/flexi-json/actions) [![Maintainability](https://api.codeclimate.com/v1/badges/bd14f8a5a0c7575d2ac2/maintainability)](https://codeclimate.com/github/GD-Personal/flexi-json/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/bd14f8a5a0c7575d2ac2/test_coverage)](https://codeclimate.com/github/GD-Personal/flexi-json/test_coverage)
+[![Gem Version](https://img.shields.io/gem/v/flexi-json.svg)](https://rubygems.org/gems/flexi-json)
+[![Github Actions](https://github.com/GD-Personal/flexi-json/actions/workflows/ci.yml/badge.svg)](https://github.com/GD-Personal/flexi-json/actions)
+[![Maintainability](https://api.codeclimate.com/v1/badges/bd14f8a5a0c7575d2ac2/maintainability)](https://codeclimate.com/github/GD-Personal/flexi-json/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/bd14f8a5a0c7575d2ac2/test_coverage)](https://codeclimate.com/github/GD-Personal/flexi-json/test_coverage)
 
 # flexi-json
 
@@ -55,7 +58,7 @@ flexi_json.search({first_name: "john", address: "sydney"}, options)
 ```
 
 ## TODOS
-- Improve search filter by specifying fields to filter from
+- Generate results in json, csv, txt, or output in the console
 - Add CRUD support to the dataset
 - Optimise the search function by implementing indeces 
 - Optimise the loader by chunking the data
