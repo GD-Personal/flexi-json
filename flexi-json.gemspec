@@ -12,10 +12,10 @@ Gem::Specification.new do |spec|
   spec.description = "A versatile Ruby gem designed for manipulating JSON data. With functionalities for searching, generating new JSON, and transforming existing structures."
   spec.homepage = "https://github.com/GD-Personal/flexi-json"
   spec.license = "MIT"
-  spec.required_ruby_version = ">= 3.0.0"
+  spec.required_ruby_version = ">= 3.2.2"
 
   spec.metadata["allowed_push_host"] = "https://rubygems.org"
-
+  spec.metadata["bug_tracker_uri"] = "https://github.com/GD-Personal/flexi-json/issues"
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/GD-Personal/flexi-json"
   spec.metadata["changelog_uri"] = "https://github.com/GD-Personal/flexi-json/blob/main/CHANGELOG.md"
@@ -35,11 +35,12 @@ Gem::Specification.new do |spec|
 
   # Uncomment to register a new dependency of your gem
   # spec.add_dependency "example-gem", "~> 1.0"
+  spec.add_development_dependency "rake", "~> 13.0"
+  spec.add_development_dependency "bundle-audit", "~> 0.1.0"
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "standard", "~> 1.3"
   spec.add_development_dependency "simplecov", "~> 0.22.0"
   spec.add_development_dependency "simplecov_json_formatter", "~> 0.1.4"
-  spec.add_development_dependency "github_changelog_generator", "~> 1.16.4"
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html
