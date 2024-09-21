@@ -20,8 +20,7 @@ module Flexi
         return false if valid_fields.empty?
 
         valid_fields.any? do |field|
-          value = send(field)
-          value.to_s.downcase.include?(query.to_s.downcase)
+          attributes[field.to_sym].to_s.downcase.include?(query.to_s.downcase)
         end
       end
 
