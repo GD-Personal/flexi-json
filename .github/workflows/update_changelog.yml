@@ -27,5 +27,4 @@ jobs:
       with:
         committer_username: 'github-actions.bot'
         committer_email: 'github-actions.bot@users.noreply.github.com'
-        release_version: ${{ github.event.inputs.release_version }}
         github_token: ${{ secrets.GH_PAT }}
