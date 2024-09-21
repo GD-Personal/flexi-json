@@ -20,12 +20,12 @@ jobs:
         ruby:
           - '3.3.4'
 
-  steps:
-  - uses: actions/checkout@v4
-  - name: Run Changelog CI
-    uses: saadmk11/changelog-ci@v1.1.2
-    with:
-      committer_username: 'github-actions.bot'
-      committer_email: 'github-actions.bot@users.noreply.github.com'
-      release_version: ${{ github.event.inputs.release_version }}
-      github_token: ${{ secrets.GH_PAT }}
+    steps:
+    - uses: actions/checkout@v4
+    - name: Run Changelog CI
+      uses: saadmk11/changelog-ci@v1.1.2
+      with:
+        committer_username: 'github-actions.bot'
+        committer_email: 'github-actions.bot@users.noreply.github.com'
+        release_version: ${{ github.event.inputs.release_version }}
+        github_token: ${{ secrets.GH_PAT }}
