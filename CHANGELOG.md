@@ -1,4 +1,10 @@
-# Version: 0.2.0
+# Version: 0.3.0 -  2024-09-22
+
+* [#10](https://github.com/GD-Personal/flexi-json/pull/10): Release 0.2.0
+* [#11](https://github.com/GD-Personal/flexi-json/pull/11): v0.3.0 - Advanced search 
+
+
+# Version: 0.2.0 - 2024-09-21
 
 * [#1](https://github.com/GD-Personal/flexi-json/pull/1): Add support for different data input to the loader
 * [#2](https://github.com/GD-Personal/flexi-json/pull/2): Add the github_changelog_generator gem
