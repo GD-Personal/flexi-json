@@ -30,6 +30,7 @@ flexi_json = Flexi::Json::Run.new("some/path/to/file.json")
 
 # Load a raw json data
 flexi_json = Flexi::Json::Run.new("{\"name\":\"John\",\"address\":\"Sydney Australia\"}")
+# => <Flexi::Json::Run:0x0000ffffa0f5fc58 @datasets=[#<Flexi::Json::Dataset:0x0000ffffa0f5f668 @address="Sydney Australia", @attributes={:name=>"John", :address=>"Sydney Australia"}, @name="John", @searchable_fields=["name", "address"]>]>
 
 # Load a json data from aurl
 flexi_json = Flexi::Json::Run.new("https://raw.githubusercontent.com/GD-Personal/flexi-json/main/spec/data/dataset.json")
@@ -44,6 +45,13 @@ flexi_json.search("john", "first_name,email")
 # Find duplicate emails
 flexi_json.find_duplicates("email")
 flexi_json.find_duplicates("email,full_name")
+```
+
+## Advanced search
+```ruby
+options = {matched_all: true, exact_match: false}
+flexi_json.search({first_name: "john", address: "sydney"}, options)
+# => [#<Flexi::Json::Dataset:0x0000ffffa0f5f668 @address="Sydney Australia", @attributes={:name=>"John", :address=>"Sydney Australia"}, @name="John", @searchable_fields=["name", "address"]>]
 ```
 
 ## TODOS

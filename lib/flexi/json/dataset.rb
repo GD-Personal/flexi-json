@@ -1,3 +1,4 @@
+require "debug"
 module Flexi
   module Json
     class Dataset
@@ -5,7 +6,6 @@ module Flexi
 
       def initialize(attributes = {})
         @attributes = attributes
-
         @attributes.each do |key, value|
           validate_key(key)
           set_instance_variable(key, value)
@@ -13,15 +13,20 @@ module Flexi
         end
       end
 
-      # Returns true if any of the client's fields match the search query
-      def matches?(query, fields = searchable_fields)
-        valid_fields = fields&.select { |field| searchable_fields.include?(field) } || searchable_fields
+      def matches?(query, fields = searchable_fields, options: Searcher::DEFAULT_MATCH_OPTIONS)
+        validateable_fields = query.is_a?(Hash) ? query.keys.map(&:to_s) : fields
+        valid_fields = validateable_fields&.select { |field| searchable_fields.include?(field) } || searchable_fields
 
         return false if valid_fields.empty?
 
-        valid_fields.any? do |field|
-          value = send(field)
-          value.to_s.downcase.include?(query.to_s.downcase)
+        matching_method = options[:matched_all] ? :all? : :any?
+        valid_fields.public_send(matching_method) do |field|
+          search_query = query.is_a?(Hash) ? query[field.to_sym] : query
+          if options[:exact_match]
+            attributes[field.to_sym].to_s.downcase == search_query.to_s.downcase
+          else
+            attributes[field.to_sym].to_s.downcase.include?(search_query.to_s.downcase)
+          end
         end
       end
 

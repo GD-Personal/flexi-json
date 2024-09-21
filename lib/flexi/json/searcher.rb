@@ -3,7 +3,12 @@ require "json"
 module Flexi
   module Json
     class Searcher
-      attr_reader :data
+      attr_reader :data, :result
+
+      DEFAULT_MATCH_OPTIONS = {
+        matched_all: false,
+        exact_match: false
+      }.freeze
 
       def initialize(data)
         @data = data
@@ -11,7 +16,7 @@ module Flexi
       end
 
       def search(query, fields = nil)
-        @data.select { |data| data.matches?(query, fields) }
+        @result = @data.select { |data| data.matches?(query, fields) }
       end
 
       def find_duplicates(keys)
@@ -28,11 +33,11 @@ module Flexi
           duplicates[key] = value if value.size > 1
         end
 
-        duplicates.values.flatten
+        @result = duplicates.values.flatten
       end
 
       # Displays results to the console
-      def display_results(results, output = $stdout)
+      def display_results(results = @result, output = $stdout)
         if results.empty?
           output.puts "No data found."
         else
