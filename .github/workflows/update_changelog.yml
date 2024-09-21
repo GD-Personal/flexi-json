@@ -1,7 +1,6 @@
 name: Update Changelog on Merge to Main
 
 on:
-  push:
   pull_request:
     types: [ opened ]
 
