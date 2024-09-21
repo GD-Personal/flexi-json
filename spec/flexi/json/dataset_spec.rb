@@ -1,4 +1,5 @@
 require "spec_helper"
+require "debug"
 
 RSpec.describe Flexi::Json::Dataset do
   describe ".initialize" do
@@ -92,6 +93,56 @@ RSpec.describe Flexi::Json::Dataset do
     context "when passing a nil search field" do
       it "falls back to the default searchable fields" do
         expect(subject.matches?("john", nil)).to eq true
+      end
+    end
+
+    context "when passing a hash object" do
+      context "when no match option is passed" do
+        it "returns a valid match" do
+          expect(subject.matches?({full_name: "john"})).to eq true
+          expect(subject.matches?({full_name: "mary"})).to eq false
+          expect(subject.matches?({full_name: "john", email: "gina@gmail.com"})).to eq true
+          expect(subject.matches?({full_name: "mary", email: "john.doe"})).to eq true
+        end
+      end
+
+      context "when matched_all option is true" do
+        it "returns a match" do
+          expect(subject.matches?({full_name: "john"}, options: {matched_all: true})).to eq true
+          expect(subject.matches?({full_name: "john", email: "john.doe@gmail.com"}, options: {matched_all: true})).to eq true
+          expect(subject.matches?({full_name: "john", email: "maryjane@gmail.com"}, options: {matched_all: true})).to eq false
+        end
+      end
+
+      context "when matched_all option is false" do
+        it "returns a valid match" do
+          expect(subject.matches?({full_name: "john", email: "maryjane@gmail.com"}, options: {matched_all: false})).to eq true
+        end
+      end
+
+      context "when exact_match option is true" do
+        it "returns a valid match" do
+          expect(subject.matches?({full_name: "john doe"}, options: {exact_match: true})).to eq true
+          expect(subject.matches?({full_name: "john doe", email: "john.doe@gmail.com"}, options: {exact_match: true})).to eq true
+          expect(subject.matches?({full_name: "john", email: "maryjane@gmail.com"}, options: {exact_match: true})).to eq false
+        end
+      end
+
+      context "when exact_match and matched_all option is set" do
+        it "returns a valid match" do
+          expect(subject.matches?({full_name: "john", email: "maryjane@gmail.com"}, options: {exact_match: true, matched_all: true})).to eq false
+          expect(subject.matches?({full_name: "john doe", email: "maryjane@gmail.com"}, options: {exact_match: true, matched_all: true})).to eq false
+          expect(subject.matches?({full_name: "john", email: "john.doe@gmail.com"}, options: {exact_match: true, matched_all: true})).to eq false
+          expect(subject.matches?({full_name: "john doe", email: "john.doe@gmail.com"}, options: {exact_match: true, matched_all: true})).to eq true
+        end
+      end
+
+      context "when exact_match option is false" do
+        it "returns a valid match" do
+          expect(subject.matches?({full_name: "john doe"}, options: {exact_match: false})).to eq true
+          expect(subject.matches?({full_name: "john doe", email: "john.doe@gmail.com"}, options: {exact_match: false})).to eq true
+          expect(subject.matches?({full_name: "john", email: "maryjane@gmail.com"}, options: {exact_match: false})).to eq true
+        end
       end
     end
   end

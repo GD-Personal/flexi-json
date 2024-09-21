@@ -11,15 +11,20 @@ module Flexi::Json
   class Run
     # Your code goes here...
     def initialize(data)
-      @datasets = Flexi::Json::Loader.new(data).load_data
+      datasets = Flexi::Json::Loader.new(data).load_data
+      @searcher = Flexi::Json::Searcher.new(datasets)
     end
 
     def search(query = "", fields = nil)
-      Flexi::Json::Searcher.new(@datasets).search(query, fields)
+      @searcher.search(query, fields)
     end
 
     def find_duplicates(keys)
-      Flexi::Json::Searcher.new(@datasets).find_duplicates(keys)
+      @searcher.find_duplicates(keys)
+    end
+
+    def display_results
+      @searcher.display_results
     end
   end
 end
