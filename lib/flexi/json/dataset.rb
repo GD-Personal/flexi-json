@@ -12,20 +12,22 @@ module Flexi
         end
       end
 
-      def matches?(query, fields = searchable_fields, options: Flexi::Json::Configuration.default_match_options)
-        validateable_fields = query.is_a?(Hash) ? query.keys.map(&:to_s) : fields
-        valid_fields = validateable_fields&.select { |field| searchable_fields.include?(field) } || searchable_fields
+      def matches?(query, fields = nil, options: nil)
+        options ||= Flexi::Json::Configuration.default_match_options
+
+        valid_fields = validateable_fields(query, fields)&.select do |field|
+          searchable_fields.include?(field)
+        end || searchable_fields
 
         return false if valid_fields.empty?
 
         matching_method = options[:match_all] ? :all? : :any?
         valid_fields.public_send(matching_method) do |field|
           search_query = query.is_a?(Hash) ? query[field.to_sym] : query
-          if options[:exact_match]
-            attributes[field.to_sym].to_s.downcase == search_query.to_s.downcase
-          else
-            attributes[field.to_sym].to_s.downcase.include?(search_query.to_s.downcase)
-          end
+          attribute_value = attributes[field.to_sym].to_s.downcase
+          query_value = search_query.to_s.downcase
+
+          options[:exact_match] ? attribute_value == query_value : attribute_value.include?(query_value)
         end
       end
 
@@ -34,6 +36,16 @@ module Flexi
       end
 
       private
+
+      def validateable_fields(query, fields)
+        if query.is_a?(Hash)
+          query.keys.map(&:to_s)
+        elsif fields.is_a?(String)
+          fields.delete(" ").split(",")
+        elsif fields.is_a?(Array)
+          [fields || searchable_fields].flatten
+        end
+      end
 
       # Method to validate that a key is a valid method name and not dangerous
       def valid_key?(key)

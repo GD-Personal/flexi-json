@@ -10,12 +10,10 @@ module Flexi::Json
   class << self
     attr_writer :configuration
 
-    # Access or initialize the configuration object
     def configuration
       @configuration ||= Flexi::Json::Configuration.instance
     end
 
-    # Configure block for setting custom configurations
     def configure
       yield(configuration)
     end
@@ -26,8 +24,8 @@ module Flexi::Json
     end
   end
 
-  def search(query = "", fields = nil)
-    @searcher.search(query, fields)
+  def search(query = "", fields = nil, options: nil)
+    @searcher.search(query, fields, options: options)
   end
 
   def find_duplicates(keys)

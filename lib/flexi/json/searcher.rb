@@ -10,8 +10,8 @@ module Flexi
         @result = []
       end
 
-      def search(query, fields = nil)
-        @result = @data.select { |data| data.matches?(query, fields) }
+      def search(query, fields = nil, options: nil)
+        @result = @data.select { |data| data.matches?(query, fields, options: options) }
       end
 
       def find_duplicates(keys)
