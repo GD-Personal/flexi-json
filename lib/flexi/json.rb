@@ -19,21 +19,18 @@ module Flexi::Json
     def configure
       yield(configuration)
     end
-  end
 
-  class Run
-    # Your code goes here...
-    def initialize(data)
+    def new(data)
       datasets = Flexi::Json::Loader.new(data).load_data
       @searcher = Flexi::Json::Searcher.new(datasets)
     end
+  end
 
-    def search(query = "", fields = nil)
-      @searcher.search(query, fields)
-    end
+  def search(query = "", fields = nil)
+    @searcher.search(query, fields)
+  end
 
-    def find_duplicates(keys)
-      @searcher.find_duplicates(keys)
-    end
+  def find_duplicates(keys)
+    @searcher.find_duplicates(keys)
   end
 end
