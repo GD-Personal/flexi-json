@@ -28,18 +28,19 @@ bundle install
 ```ruby
 require 'flexi/json'
 
-# Load a json data from a local file
-flexi_json = Flexi::Json::Run.new("some/path/to/file.json")
-
 # Load a raw json data
 flexi_json = Flexi::Json::Run.new("{\"name\":\"John\",\"address\":\"Sydney Australia\"}")
 # => <Flexi::Json::Run:0x0000ffffa0f5fc58 @datasets=[#<Flexi::Json::Dataset:0x0000ffffa0f5f668 @address="Sydney Australia", @attributes={:name=>"John", :address=>"Sydney Australia"}, @name="John", @searchable_fields=["name", "address"]>]>
 
-# Load a json data from aurl
+# Load a json data from a local file
+flexi_json = Flexi::Json::Run.new("some/path/to/file.json")
+
+# Load a json data from a url
 flexi_json = Flexi::Json::Run.new("https://raw.githubusercontent.com/GD-Personal/flexi-json/main/spec/data/dataset.json")
 
 # Search for data
 flexi_json.search("john")
+# => [#<Flexi::Json::Dataset:0x0000ffffa0f5f668 @address="Sydney Australia", @attributes={:name=>"John", :address=>"Sydney Australia"}, @name="John", @searchable_fields=["name", "address"]>]
 
 # Or filter it by your chosen key e.g first_name
 flexi_json.search("john", "first_name")
