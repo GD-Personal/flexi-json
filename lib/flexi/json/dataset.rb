@@ -1,4 +1,3 @@
-require "debug"
 module Flexi
   module Json
     class Dataset
@@ -13,7 +12,7 @@ module Flexi
         end
       end
 
-      def matches?(query, fields = searchable_fields, options: Searcher::DEFAULT_MATCH_OPTIONS)
+      def matches?(query, fields = searchable_fields, options: Flexi::Json::Configuration.default_match_options)
         validateable_fields = query.is_a?(Hash) ? query.keys.map(&:to_s) : fields
         valid_fields = validateable_fields&.select { |field| searchable_fields.include?(field) } || searchable_fields
 

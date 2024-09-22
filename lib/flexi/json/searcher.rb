@@ -5,11 +5,6 @@ module Flexi
     class Searcher
       attr_reader :data, :result
 
-      DEFAULT_MATCH_OPTIONS = {
-        matched_all: false,
-        exact_match: false
-      }.freeze
-
       def initialize(data)
         @data = data
         @result = []
