@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    flexi-json (0.4.1)
+    flexi-json (0.4.2)
 
 GEM
   remote: https://rubygems.org/
