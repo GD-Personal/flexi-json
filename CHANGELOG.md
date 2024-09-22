@@ -1,3 +1,8 @@
+# Version: 0.4.1 (22-09-2024)
+
+* [0270c44](https://github.com/GD-Personal/flexi-json/commit/0270c44d7ffabd88ed0b69b09f1e98910257d99b): Update the readme and changelog
+
+
 # Version: 0.4.0 -  2024-09-22
 
 * [#15](https://github.com/GD-Personal/flexi-json/pull/15): Add a configuration and renamed matched_all to match_all.
