@@ -57,6 +57,14 @@ flexi_json.search({first_name: "john", address: "sydney"}, options)
 # => [#<Flexi::Json::Dataset:0x0000ffffa0f5f668 @address="Sydney Australia", @attributes={:name=>"John", :address=>"Sydney Australia"}, @name="John", @searchable_fields=["name", "address"]>]
 ```
 
+## Configuration
+```ruby
+Flexi::Json.configure do |config|
+  config.exact_match_search = true
+  config.match_all_fields = true
+end
+```
+
 ## TODOS
 - Generate results in json, csv, txt, or output in the console
 - Add CRUD support to the dataset

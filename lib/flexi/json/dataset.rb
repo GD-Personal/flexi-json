@@ -1,4 +1,3 @@
-require "debug"
 module Flexi
   module Json
     class Dataset
@@ -13,13 +12,13 @@ module Flexi
         end
       end
 
-      def matches?(query, fields = searchable_fields, options: Searcher::DEFAULT_MATCH_OPTIONS)
+      def matches?(query, fields = searchable_fields, options: Flexi::Json::Configuration.default_match_options)
         validateable_fields = query.is_a?(Hash) ? query.keys.map(&:to_s) : fields
         valid_fields = validateable_fields&.select { |field| searchable_fields.include?(field) } || searchable_fields
 
         return false if valid_fields.empty?
 
-        matching_method = options[:matched_all] ? :all? : :any?
+        matching_method = options[:match_all] ? :all? : :any?
         valid_fields.public_send(matching_method) do |field|
           search_query = query.is_a?(Hash) ? query[field.to_sym] : query
           if options[:exact_match]

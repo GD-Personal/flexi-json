@@ -1,12 +1,25 @@
 # frozen_string_literal: true
 
+require_relative "json/configuration"
 require_relative "json/dataset"
 require_relative "json/loader"
 require_relative "json/searcher"
 require_relative "json/version"
 
 module Flexi::Json
-  class Error < StandardError; end
+  class << self
+    attr_writer :configuration
+
+    # Access or initialize the configuration object
+    def configuration
+      @configuration ||= Flexi::Json::Configuration.instance
+    end
+
+    # Configure block for setting custom configurations
+    def configure
+      yield(configuration)
+    end
+  end
 
   class Run
     # Your code goes here...
@@ -21,10 +34,6 @@ module Flexi::Json
 
     def find_duplicates(keys)
       @searcher.find_duplicates(keys)
-    end
-
-    def display_results
-      @searcher.display_results
     end
   end
 end
