@@ -106,17 +106,17 @@ RSpec.describe Flexi::Json::Dataset do
         end
       end
 
-      context "when matched_all option is true" do
+      context "when match_all option is true" do
         it "returns a match" do
-          expect(subject.matches?({full_name: "john"}, options: {matched_all: true})).to eq true
-          expect(subject.matches?({full_name: "john", email: "john.doe@gmail.com"}, options: {matched_all: true})).to eq true
-          expect(subject.matches?({full_name: "john", email: "maryjane@gmail.com"}, options: {matched_all: true})).to eq false
+          expect(subject.matches?({full_name: "john"}, options: {match_all: true})).to eq true
+          expect(subject.matches?({full_name: "john", email: "john.doe@gmail.com"}, options: {match_all: true})).to eq true
+          expect(subject.matches?({full_name: "john", email: "maryjane@gmail.com"}, options: {match_all: true})).to eq false
         end
       end
 
-      context "when matched_all option is false" do
+      context "when match_all option is false" do
         it "returns a valid match" do
-          expect(subject.matches?({full_name: "john", email: "maryjane@gmail.com"}, options: {matched_all: false})).to eq true
+          expect(subject.matches?({full_name: "john", email: "maryjane@gmail.com"}, options: {match_all: false})).to eq true
         end
       end
 
@@ -128,12 +128,12 @@ RSpec.describe Flexi::Json::Dataset do
         end
       end
 
-      context "when exact_match and matched_all option is set" do
+      context "when exact_match and match_all option is set" do
         it "returns a valid match" do
-          expect(subject.matches?({full_name: "john", email: "maryjane@gmail.com"}, options: {exact_match: true, matched_all: true})).to eq false
-          expect(subject.matches?({full_name: "john doe", email: "maryjane@gmail.com"}, options: {exact_match: true, matched_all: true})).to eq false
-          expect(subject.matches?({full_name: "john", email: "john.doe@gmail.com"}, options: {exact_match: true, matched_all: true})).to eq false
-          expect(subject.matches?({full_name: "john doe", email: "john.doe@gmail.com"}, options: {exact_match: true, matched_all: true})).to eq true
+          expect(subject.matches?({full_name: "john", email: "maryjane@gmail.com"}, options: {exact_match: true, match_all: true})).to eq false
+          expect(subject.matches?({full_name: "john doe", email: "maryjane@gmail.com"}, options: {exact_match: true, match_all: true})).to eq false
+          expect(subject.matches?({full_name: "john", email: "john.doe@gmail.com"}, options: {exact_match: true, match_all: true})).to eq false
+          expect(subject.matches?({full_name: "john doe", email: "john.doe@gmail.com"}, options: {exact_match: true, match_all: true})).to eq true
         end
       end
 

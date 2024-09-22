@@ -18,7 +18,7 @@ module Flexi
 
         return false if valid_fields.empty?
 
-        matching_method = options[:matched_all] ? :all? : :any?
+        matching_method = options[:match_all] ? :all? : :any?
         valid_fields.public_send(matching_method) do |field|
           search_query = query.is_a?(Hash) ? query[field.to_sym] : query
           if options[:exact_match]

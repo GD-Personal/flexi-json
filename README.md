@@ -54,8 +54,15 @@ flexi_json.search({first_name: "john", address: "sydney"}, options)
 # => [#<Flexi::Json::Dataset:0x0000ffffa0f5f668 @address="Sydney Australia", @attributes={:name=>"John", :address=>"Sydney Australia"}, @name="John", @searchable_fields=["name", "address"]>]
 ```
 
+## Configuration
+```ruby
+Flexi::Json.configure do |config|
+  config.exact_match_search = true
+  config.match_all_fields = true
+end
+```
+
 ## TODOS
-- Improve search filter by specifying fields to filter from
 - Add CRUD support to the dataset
 - Optimise the search function by implementing indeces 
 - Optimise the loader by chunking the data

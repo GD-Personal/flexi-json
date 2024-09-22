@@ -12,7 +12,7 @@ module Flexi::Json
 
     # Access or initialize the configuration object
     def configuration
-      @configuration ||= Flexi::Json::Configuration.new
+      @configuration ||= Flexi::Json::Configuration.instance
     end
 
     # Configure block for setting custom configurations
