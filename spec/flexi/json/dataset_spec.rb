@@ -1,5 +1,4 @@
 require "spec_helper"
-require "debug"
 
 RSpec.describe Flexi::Json::Dataset do
   describe ".initialize" do

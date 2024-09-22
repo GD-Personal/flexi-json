@@ -53,8 +53,11 @@ flexi_json.find_duplicates("email,full_name")
 
 ## Advanced search
 ```ruby
-options = {matched_all: true, exact_match: false}
-flexi_json.search({first_name: "john", address: "sydney"}, options)
+search_query = {first_name: "john", address: "sydney"}
+flexi_json.search(
+  search_query, 
+  options: {matched_all: true, exact_match: false}
+)
 # => [#<Flexi::Json::Dataset:0x0000ffffa0f5f668 @address="Sydney Australia", @attributes={:name=>"John", :address=>"Sydney Australia"}, @name="John", @searchable_fields=["name", "address"]>]
 ```
 
